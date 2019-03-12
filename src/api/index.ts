@@ -1,7 +1,6 @@
 import axios, {
   AxiosError,
   AxiosResponse,
-  CancelToken,
 } from 'axios';
 
 const deckApiUrl = 'https://deckofcardsapi.com/api/deck/';
