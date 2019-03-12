@@ -3,6 +3,7 @@ import React, { Component, useEffect } from 'react';
 import ReactLoading from 'react-loading';
 
 import { Card } from '../../types';
+import { Paper, Button } from '@material-ui/core';
 
 export interface gameBoardProps {
   deckId: string,
@@ -14,7 +15,7 @@ export interface gameBoardProps {
 }
 
 
-const GameBoard: React.SFC<gameBoardProps> = ( props ) => {
+const GameBoard: React.SFC<gameBoardProps> = (props) => {
   useEffect(() => {
     props.getDeck();
   }, [])
@@ -22,7 +23,9 @@ const GameBoard: React.SFC<gameBoardProps> = ( props ) => {
   const handleDrawCard = () => props.drawCard();
 
   return (
-    <div className="App">
+    <Paper
+      style={{ height: '300px', width: '200px' }}
+    >
       {props.loading &&
         <ReactLoading
           type="spin"
@@ -32,17 +35,19 @@ const GameBoard: React.SFC<gameBoardProps> = ( props ) => {
         />
       }
       {!props.loading &&
-        <>
-        {props.currentCard &&
-          <img src={props.currentCard.image} height="150" width="105" />
-        }
-        <button onClick={handleDrawCard}>
-          Draw Card
-        </button>
-        </>
+        <div style={{ position: 'relative', top: '50px' }}>
+          {props.currentCard &&
+            <img src={props.currentCard.image} height="150" width="105" />
+          }
+          <div>
+            <Button onClick={handleDrawCard}>
+              Draw Card
+            </Button>
+          </div>
+        </div>
       }
-    </div>
-    );
-  }
+    </Paper>
+  );
+}
 
 export default GameBoard;

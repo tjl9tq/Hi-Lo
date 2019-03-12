@@ -7,6 +7,15 @@ import rootReducer from './reducers'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import thunk from 'redux-thunk';
+import { MuiThemeProvider } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+  },
+});
 
 interface DevToolsWindow extends Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
@@ -23,7 +32,9 @@ const store = createStore(
 
 render(
   <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
     <App />
+    </MuiThemeProvider>
   </Provider>,
 document.getElementById('root')
 );
