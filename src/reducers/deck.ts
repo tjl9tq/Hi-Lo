@@ -37,11 +37,11 @@ export default (state: DeckState = initialState, action: any) => {
         loading: false,
         error: action.payload,
         }
-    case ActionTypes.DECK_DRAW_PENDING:
-      return {
-        ...state,
-        loading: true,
-      }
+    // case ActionTypes.DECK_DRAW_PENDING:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   }
     case ActionTypes.DECK_DRAW_FULFILLED:
       return {
         ...state,

@@ -13,13 +13,13 @@ type Props = WithStyles<typeof styles>;
 const styles = createStyles({
   isActive: {
     position: 'absolute',
-    bottom: '50px',
+    bottom: '200px',
   },
   playerOne: {
-    left: '50px',
+    left: '300px',
   },
   playerTwo: {
-    right: '50px',
+    right: '300px',
   }
 
 });
@@ -30,11 +30,13 @@ const Players: React.SFC<Props> = ({ classes }) => {
       <div className={`${classes.playerOne} ${classes.isActive}`}>
         <Player
           player={1}
+          points={2}
         />
       </div>
       <div className={`${classes.playerTwo} ${classes.isActive}`}>
         <Player
           player={2}
+          points={32} 
         />
       </div>
     </>

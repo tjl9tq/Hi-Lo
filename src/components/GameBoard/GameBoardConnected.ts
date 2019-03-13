@@ -5,7 +5,6 @@ import GameBoard from './GameBoard';
 import { Thunks } from '../../thunks/deck';
 
 const mapStateToProps = (state: ApplicationState) => ({
-  deckId: selectors.getDeckId(state),
   remainingCards: selectors.getRemainingCards(state),
   loading: selectors.getLoading(state),
   currentCard: selectors.getCurrentCard(state),

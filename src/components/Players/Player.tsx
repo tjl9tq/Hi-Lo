@@ -1,11 +1,16 @@
 import React from 'react'
 
-const Player = (props: any) => {
+interface PlayerProps {
+  player: number,
+  points: number,
+}
+
+const Player: React.SFC<PlayerProps> = ({ player, points }) => {
   return (
     <div>
-      Current Player: {props.player}
+      Player {player}
       <br />
-      Points:
+      Points: {points}
     </div>
   )
 }
