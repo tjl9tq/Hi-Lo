@@ -15,6 +15,7 @@ export interface gameBoardProps {
   currentCard: Card | null,
   loading: boolean,
   remainingCards: number,
+  hiOrLo: string,
 }
 
 export interface gameBoardHandlers {
@@ -46,8 +47,8 @@ const GameBoard: React.SFC<Props> = ({
   drawCard,
   getDeck,
   loading,
-  remainingCards,
   classes,
+  hiOrLo
 }) => {
   useEffect(() => {
     getDeck();
@@ -55,8 +56,16 @@ const GameBoard: React.SFC<Props> = ({
 
   const [pileCount, setPileCount] = useState(0);
   const [guess, setGuess] = useState();
+  const [correctGuesses, setCorrectGuesses] = useState(0);
+
+  const handleGuess = () => {
+    if (guess === hiOrLo) {
+      setCorrectGuesses(correctGuesses + 1);
+    }
+  }
 
   const handleDrawCard = () => {
+    handleGuess();
     setPileCount(pileCount + 1);
     drawCard();
   }
@@ -106,6 +115,8 @@ const GameBoard: React.SFC<Props> = ({
               </IconButton>
               <br />
                 Cards in Pile: {pileCount}
+              <br />
+                Correct guesses streak: {correctGuesses}
             </div>
           </div>
         </div>

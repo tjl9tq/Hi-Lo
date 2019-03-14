@@ -1,5 +1,6 @@
 import { Card } from '../types'
 import { Actions, ActionTypes } from '../actions/deck'
+import { hiOrLo } from '../helpers';
 
 export interface DeckState {
   currentCard: Card | null;
@@ -7,6 +8,7 @@ export interface DeckState {
   loading: boolean;
   remainingCards: number;
   error: any,
+  hiOrLo: string,
 }
 
 const initialState: DeckState = {
@@ -15,6 +17,7 @@ const initialState: DeckState = {
   loading: false,
   remainingCards: 0,
   error: null,
+  hiOrLo: '',
 }
 
 export default (state: DeckState = initialState, action: any) => {
@@ -54,6 +57,11 @@ export default (state: DeckState = initialState, action: any) => {
         ...state,
         loading: false,
         error: action.payload,
+      }
+    case ActionTypes.DECK_HI_OR_LO:
+      return {
+        ...state,
+        hiOrLo: action.payload,
       }
   default:
     return state

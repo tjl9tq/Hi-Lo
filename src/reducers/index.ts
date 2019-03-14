@@ -10,6 +10,7 @@ export const selectors = {
   getDeckId: (state: ApplicationState) => state.deck.deckId,
   getLoading: (state: ApplicationState) => state.deck.loading,
   getRemainingCards: (state: ApplicationState) => state.deck.remainingCards,
+  getHiOrLo: (state: ApplicationState) => state.deck.hiOrLo,
 }
 
 export default combineReducers<ApplicationState>({

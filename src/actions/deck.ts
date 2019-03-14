@@ -1,4 +1,4 @@
-import { Deck, Card } from '../types';
+import { Deck, Card, DrawCardResponse } from '../types';
 
 export const ActionTypes = {
   DECK_GET_PENDING: 'DECK_GET_PENDING',
@@ -7,6 +7,7 @@ export const ActionTypes = {
   DECK_DRAW_PENDING: 'DECK_DRAW_PENDING',
   DECK_DRAW_FULFILLED: 'DECK_DRAW_FULFILLED',
   DECK_DRAW_REJECTED: 'DECK_DRAW_REJECTED',
+  DECK_HI_OR_LO: 'DECK_HI_OR_LO'
 }
 
 export const Actions = {
@@ -24,12 +25,16 @@ export const Actions = {
   deckDrawPending: () => ({
     type: ActionTypes.DECK_DRAW_PENDING,
   }),
-  deckDrawFulfilled: (card: Card) => ({
+  deckDrawFulfilled: (card: DrawCardResponse) => ({
     type: ActionTypes.DECK_DRAW_FULFILLED,
     payload: card,
   }),
   deckDrawRejected: (error: any) => ({
     type: ActionTypes.DECK_DRAW_REJECTED,
     payload: error,
+  }),
+  deckHiOrLo: (hiOrLo: string) => ({
+    type: ActionTypes.DECK_HI_OR_LO,
+    payload: hiOrLo,
   }),
 }

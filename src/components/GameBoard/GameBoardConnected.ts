@@ -8,6 +8,7 @@ const mapStateToProps = (state: ApplicationState) => ({
   remainingCards: selectors.getRemainingCards(state),
   loading: selectors.getLoading(state),
   currentCard: selectors.getCurrentCard(state),
+  hiOrLo: selectors.getHiOrLo(state),
 })
 
 const mapDispatchToProps = {
