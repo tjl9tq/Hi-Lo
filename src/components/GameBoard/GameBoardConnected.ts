@@ -12,7 +12,6 @@ const mapStateToProps = (state: ApplicationState) => ({
   playerOneTurn: selectors.getPlayerOneTurn(state),
   playerOnePoints: selectors.getPlayerOnePoints(state),
   playerTwoPoints: selectors.getPlayerTwoPoints(state),
-  
 })
 
 const mapDispatchToProps = {
@@ -21,6 +20,7 @@ const mapDispatchToProps = {
   changeTurns: Actions.playerChangeTurn,
   setPlayerOnePoints: Actions.playerSetOnePoints,
   setPlayerTwoPoints: Actions.playerSetTwoPoints,
+  resetPlayers: Actions.resetGame,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);

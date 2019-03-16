@@ -9,8 +9,8 @@ import {
 const styles = createStyles({
   deckContainer: {
     position: 'relative',
-    bottom: '430px',
-    left: '200px',
+    bottom: '500px',
+    left: '240px',
     fontSize: 'medium',
   },
   deck: {

@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core/styles';
 import { hiOrLo } from '../../helpers';
 import Players from '../Players/Players';
+import WinModal from '../WinModal/WinModal';
 
 export interface gameBoardProps {
   currentCard: Card | null,
@@ -26,6 +27,7 @@ export interface gameBoardHandlers {
   getDeck: () => void;
   drawCard: () => void;
   changeTurns: () => void;
+  resetPlayers: () => void;
   setPlayerOnePoints: (points: number) => void;
   setPlayerTwoPoints: (points: number) => void;
 }
@@ -57,7 +59,12 @@ const styles = createStyles({
   },
   playerTurn: {
     paddingBottom: '10px',
-  }
+  },
+  resetButton: {
+    position: 'absolute',
+    top: '20px',
+    right: '30px',
+  },
 })
 
 type Props = WithStyles<typeof styles> & gameBoardProps & gameBoardHandlers;
@@ -74,6 +81,8 @@ const GameBoard: React.SFC<Props> = ({
   playerOnePoints,
   playerTwoPoints,
   changeTurns,
+  remainingCards,
+  resetPlayers,
 }) => {
   useEffect(() => {
     getDeck();
@@ -93,6 +102,24 @@ const GameBoard: React.SFC<Props> = ({
   const getHi = () => guess === 'Hi';
   const getLo = () => guess === 'Lo';
   const clearGuess = () => setGuess('');
+
+  const gameOver = () => !loading && remainingCards === 0;
+
+  const winner = () =>  {
+    if (playerOnePoints < playerTwoPoints) {
+      return '1';
+    };
+    if (playerOnePoints > playerTwoPoints) {
+      return '2';
+    }
+    return 'none';
+  };
+
+  const resetGame = () => {
+    getDeck();
+    resetPlayers();
+    setPileCount(-1);
+  }
 
   const handleGuess = () => {
     setPileCount(pileCount + 1);
@@ -119,9 +146,14 @@ const GameBoard: React.SFC<Props> = ({
   }
 
   const handleDrawCard = () => {
-    if (getHi() || getLo() || pileCount === 0){
+    // if (getHi() || getLo() || pileCount === 0) {
       drawCard();
-    }
+    // }
+  }
+
+  const handlePassTurn = () => {
+    setCorrectGuesses(0);
+    changeTurns();
   }
 
   return (
@@ -179,15 +211,27 @@ const GameBoard: React.SFC<Props> = ({
         playerOnePoints={playerOnePoints}
         playerTwoPoints={playerTwoPoints}
       />
-      { correctGuesses > 2 &&
         <Button
           variant="contained"
+          color="secondary"
           className={classes.passButton}
-          onClick={changeTurns}
+          onClick={handlePassTurn}
+          disabled={!(correctGuesses > 2)}
         >
-          Pass Turn
+          Pass Turn 
         </Button>
-      }
+      <Button
+        onClick={resetGame}
+        className={classes.resetButton}
+        color="primary"
+      >
+        Restart Game 
+      </Button>
+      <WinModal
+        open={gameOver()}
+        winner={winner()}
+        resetGame={resetGame}
+      />
     </>
   );
 }

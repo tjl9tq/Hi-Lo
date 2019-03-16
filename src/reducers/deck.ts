@@ -30,6 +30,7 @@ export default (state: DeckState = initialState, action: any) => {
         loading: false,
         deckId: action.payload.deck_id,
         remainingCards: action.payload.remaining,
+        currentCard: null,
         }
     case ActionTypes.DECK_GET_REJECTED:
       return { 

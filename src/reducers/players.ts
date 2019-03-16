@@ -29,6 +29,10 @@ export default (state: PlayersState = initialState, action: any) => {
         ...state,
         playerTwoPoints: action.payload,
       }
+    case ActionTypes.PLAYER_RESET_GAME:
+      return {
+        ...initialState,
+      }
     default:
       return state
   }
