@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 
 import { Card } from '../../types';
-import { Paper, Button, IconButton } from '@material-ui/core';
-import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons';
+import { Paper, Button } from '@material-ui/core';
 import {
   createStyles,
   WithStyles,
@@ -13,6 +12,7 @@ import {
 import { hiOrLo } from '../../helpers';
 import Players from '../Players/Players';
 import WinModal from '../WinModal/WinModal';
+import GameBoardContent from './GameBoardContent';
 
 export interface gameBoardProps {
   currentCard: Card | null,
@@ -116,17 +116,20 @@ const GameBoard: React.SFC<Props> = ({
   };
 
   const resetGame = () => {
-    getDeck();
-    resetPlayers();
-    setPileCount(-1);
+    if (currentCard) {
+      getDeck();
+      resetPlayers();
+      setPileCount(-1);
+    }
   }
 
   const handleGuess = () => {
     setPileCount(pileCount + 1);
     if (previousCard && currentCard) {
-      if (hiOrLo(previousCard, currentCard) === guess) {
+      const hiOrLoValue = hiOrLo(previousCard, currentCard)
+      if (hiOrLoValue === guess) {
         setCorrectGuesses(correctGuesses + 1);
-      } else {
+      } else if (hiOrLoValue !== 'neither' && hiOrLoValue !== guess) {
         handleIncorrectGuess();
       };
     }
@@ -146,9 +149,9 @@ const GameBoard: React.SFC<Props> = ({
   }
 
   const handleDrawCard = () => {
-    // if (getHi() || getLo() || pileCount === 0) {
+    if (getHi() || getLo() || pileCount === 0) {
       drawCard();
-    // }
+    }
   }
 
   const handlePassTurn = () => {
@@ -173,38 +176,17 @@ const GameBoard: React.SFC<Props> = ({
           </div>
         }
         {!loading &&
-          <div className={classes.gameBoardContent}>
-            {currentCard &&
-              <img src={currentCard.image} height="150" width="105" />
-            }
-            <div className={classes.textBox}>
-              <div>
-                <Button onClick={handleDrawCard}>
-                  Draw Card
-                </Button>
-              </div>
-              <div>
-                Your guess: {guess}
-                <br />
-                <IconButton onClick={setHi}>
-                  <ArrowDropUp
-                    color={getHi() ? "primary" : 'disabled'}
-                    fontSize='large'
-                  />
-                </IconButton>
-                <IconButton onClick={setLo}>
-                  <ArrowDropDown
-                    color={getLo() ? "primary" : 'disabled'}
-                    fontSize='large'
-                  />
-                </IconButton>
-                <br />
-                Cards in Pile: {pileCount}
-                <br />
-                Correct Guesses: {correctGuesses}
-              </div>
-            </div>
-          </div>
+          <GameBoardContent
+            currentCard={currentCard}
+            handleDrawCard={handleDrawCard}
+            guess={guess}
+            getHi={getHi}
+            getLo={getLo}
+            setHi={setHi}
+            setLo={setLo}
+            pileCount={pileCount}
+            correctGuesses={correctGuesses}
+          />
         }
       </Paper>
       <Players
