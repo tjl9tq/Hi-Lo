@@ -12,7 +12,7 @@ export const selectors = {
   getDeckId: (state: ApplicationState) => state.deck.deckId,
   getLoading: (state: ApplicationState) => state.deck.loading,
   getRemainingCards: (state: ApplicationState) => state.deck.remainingCards,
-  getCurrentTurn: (state: ApplicationState) => state.players.currentTurn,
+  getPlayerOneTurn: (state: ApplicationState) => state.players.playerOneTurn,
   getPlayerOnePoints: (state: ApplicationState) => state.players.playerOnePoints,
   getPlayerTwoPoints: (state: ApplicationState) => state.players.playerTwoPoints,
 }

@@ -15,6 +15,7 @@ import Players from '../Players/Players';
 
 export interface gameBoardProps {
   currentCard: Card | null,
+  playerOneTurn: boolean,
   loading: boolean,
   remainingCards: number,
   playerOnePoints: number,
@@ -24,6 +25,7 @@ export interface gameBoardProps {
 export interface gameBoardHandlers {
   getDeck: () => void;
   drawCard: () => void;
+  changeTurns: () => void;
   setPlayerOnePoints: (points: number) => void;
   setPlayerTwoPoints: (points: number) => void;
 }
@@ -47,14 +49,22 @@ const styles = createStyles({
   textBox: {
     position: 'absolute',
     top: '170px',
-    left: '40px',
+    left: '37px',
   },
+  passButton: {
+    position: 'relative',
+    bottom: '35px'
+  },
+  playerTurn: {
+    paddingBottom: '10px',
+  }
 })
 
 type Props = WithStyles<typeof styles> & gameBoardProps & gameBoardHandlers;
 
 const GameBoard: React.SFC<Props> = ({
   currentCard,
+  playerOneTurn,
   drawCard,
   getDeck,
   loading,
@@ -63,6 +73,7 @@ const GameBoard: React.SFC<Props> = ({
   setPlayerTwoPoints,
   playerOnePoints,
   playerTwoPoints,
+  changeTurns,
 }) => {
   useEffect(() => {
     getDeck();
@@ -72,7 +83,7 @@ const GameBoard: React.SFC<Props> = ({
     handleGuess();
   }, [currentCard])
 
-  const [pileCount, setPileCount] = useState(0);
+  const [pileCount, setPileCount] = useState(-1);
   const [guess, setGuess] = useState();
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [previousCard, setPreviousCard] = useState();
@@ -97,17 +108,27 @@ const GameBoard: React.SFC<Props> = ({
   }
 
   const handleIncorrectGuess = () => {
-    setPlayerOnePoints(pileCount);
-    setPileCount(0);
+    if (playerOneTurn) {
+      setPlayerOnePoints(playerOnePoints + pileCount);
+    } else {
+      setPlayerTwoPoints(playerTwoPoints + pileCount);
+    }
+    setPileCount(1);
     setCorrectGuesses(0);
+    changeTurns();
   }
 
   const handleDrawCard = () => {
-    drawCard();
+    if (getHi() || getLo() || pileCount === 0){
+      drawCard();
+    }
   }
 
   return (
     <>
+      <div className={classes.playerTurn}>
+        Current Turn: Player {playerOneTurn ? 1 : 2}
+      </div>
       <Paper className={classes.gameBoard}>
         {loading &&
           <div className={classes.loader}>
@@ -120,7 +141,6 @@ const GameBoard: React.SFC<Props> = ({
           </div>
         }
         {!loading &&
-
           <div className={classes.gameBoardContent}>
             {currentCard &&
               <img src={currentCard.image} height="150" width="105" />
@@ -129,7 +149,7 @@ const GameBoard: React.SFC<Props> = ({
               <div>
                 <Button onClick={handleDrawCard}>
                   Draw Card
-            </Button>
+                </Button>
               </div>
               <div>
                 Your guess: {guess}
@@ -149,7 +169,7 @@ const GameBoard: React.SFC<Props> = ({
                 <br />
                 Cards in Pile: {pileCount}
                 <br />
-                {correctGuesses}
+                Correct Guesses: {correctGuesses}
               </div>
             </div>
           </div>
@@ -159,6 +179,15 @@ const GameBoard: React.SFC<Props> = ({
         playerOnePoints={playerOnePoints}
         playerTwoPoints={playerTwoPoints}
       />
+      { correctGuesses > 2 &&
+        <Button
+          variant="contained"
+          className={classes.passButton}
+          onClick={changeTurns}
+        >
+          Pass Turn
+        </Button>
+      }
     </>
   );
 }

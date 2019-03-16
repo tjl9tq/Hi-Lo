@@ -1,23 +1,23 @@
 import { ActionTypes } from '../actions/players';
 
 export interface PlayersState {
-  currentTurn: number,
+  playerOneTurn: boolean,
   playerOnePoints: number,
   playerTwoPoints: number,
 }
 
 const initialState: PlayersState = {
-  currentTurn: 1,
+  playerOneTurn: true,
   playerOnePoints: 0,
   playerTwoPoints: 0,
 }
 
 export default (state: PlayersState = initialState, action: any) => {
   switch (action.type) {
-    case ActionTypes.PLAYER_SET_TURN:
+    case ActionTypes.PLAYER_CHANGE_TURN:
       return {
         ...state,
-        currentTurn: action.payload,
+        playerOneTurn: !state.playerOneTurn
       }
     case ActionTypes.PLAYER_SET_ONE_POINTS:
       return {
