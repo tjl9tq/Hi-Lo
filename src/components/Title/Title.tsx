@@ -11,7 +11,7 @@ type Props = WithStyles<typeof styles>;
 const styles = createStyles({
   title: {
     position: 'relative',
-    bottom: '70px',
+    bottom: '20px',
   }
 })
 

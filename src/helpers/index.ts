@@ -15,13 +15,13 @@ export const getValue = (card: Card) => {
   }
 }
 
-export const hiOrLo = (currentCard: Card, nextCard: Card) => {
+export const hiOrLo = (previousCard: Card, currentCard: Card) => {
+  const previousValue = getValue(previousCard);
   const currentValue = getValue(currentCard);
-  const nextValue = getValue(nextCard);
-  if (nextValue > currentValue) {
+  if (previousValue < currentValue) {
     return 'Hi';
   }
-  else if (nextValue < currentValue) {
+  else if (previousValue > currentValue) {
     return 'Lo';
   }
   else {

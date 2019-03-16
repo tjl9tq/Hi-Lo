@@ -8,38 +8,45 @@ import {
   withStyles,
 } from '@material-ui/core/styles';
 
-type Props = WithStyles<typeof styles>;
+interface PlayersProps {
+  playerOnePoints: number,
+  playerTwoPoints: number,
+}
+
+type Props = WithStyles<typeof styles> & PlayersProps;
 
 const styles = createStyles({
+  container: {
+    display: 'flex',
+  },
   isActive: {
-    position: 'absolute',
-    bottom: '200px',
+    position: 'relative',
+    bottom: '50px',
   },
   playerOne: {
-    left: '300px',
+    right: '150px',
   },
   playerTwo: {
-    right: '300px',
+    left: '150px',
   }
-
 });
 
-const Players: React.SFC<Props> = ({ classes }) => {
+const Players: React.SFC<Props> = ({ classes, playerOnePoints, playerTwoPoints }) => {
   return (
-    <>
-      <div className={`${classes.playerOne} ${classes.isActive}`}>
+    <div className={classes.container}>
+      <span className={`${classes.playerOne} ${classes.isActive}`}>
         <Player
           player={1}
-          points={2}
+          points={playerOnePoints}
         />
-      </div>
-      <div className={`${classes.playerTwo} ${classes.isActive}`}>
+      </span>
+      <span className={`${classes.playerTwo} ${classes.isActive}`}>
         <Player
           player={2}
-          points={32} 
+          points={playerTwoPoints} 
         />
-      </div>
-    </>
+      </span>
+    </div>
   )
 }
 
