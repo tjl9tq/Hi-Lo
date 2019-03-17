@@ -11,7 +11,7 @@ const styles = createStyles({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '200px',
-    boxShadow: 'black',
+
     padding: '30px',
     textAlign: 'center'
   },

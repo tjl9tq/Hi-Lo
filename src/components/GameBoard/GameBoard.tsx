@@ -13,6 +13,7 @@ import { hiOrLo } from '../../helpers';
 import Players from '../Players/Players';
 import WinModal from '../WinModal/WinModal';
 import GameBoardContent from './GameBoardContent';
+import HowToPlay from '../HowToPlay/HowToPlay';
 
 export interface gameBoardProps {
   currentCard: Card | null,
@@ -60,7 +61,7 @@ const styles = createStyles({
   playerTurn: {
     paddingBottom: '10px',
   },
-  resetButton: {
+  options: {
     position: 'absolute',
     top: '20px',
     right: '30px',
@@ -193,22 +194,25 @@ const GameBoard: React.SFC<Props> = ({
         playerOnePoints={playerOnePoints}
         playerTwoPoints={playerTwoPoints}
       />
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.passButton}
-          onClick={handlePassTurn}
-          disabled={!(correctGuesses > 2)}
-        >
-          Pass Turn 
-        </Button>
       <Button
-        onClick={resetGame}
-        className={classes.resetButton}
-        color="primary"
+        variant="contained"
+        color="secondary"
+        className={classes.passButton}
+        onClick={handlePassTurn}
+        disabled={!(correctGuesses > 2)}
       >
-        Restart Game 
+        Pass Turn 
       </Button>
+      <div className={classes.options}>
+        <HowToPlay />
+        <Button
+          onClick={resetGame}
+          color="primary"
+        >
+          Restart Game 
+        </Button>
+      </div>
+
       <WinModal
         open={gameOver()}
         winner={winner()}
