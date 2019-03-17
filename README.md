@@ -9,7 +9,7 @@ OR
 
 click [here](https://www.timliu.me/hilo)
 
-## How to Play
+### How to Play
 1. Hit DRAW CARD to start the game.
 2. Player 1 goes first
 3. Hit the up or down arrow to guess if the next card will be higher or lower than the current card. Click DRAW CARD again to lock in your guess.
