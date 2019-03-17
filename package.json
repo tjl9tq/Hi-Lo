@@ -29,7 +29,8 @@
     "webpack-dev-server": "3.2.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js"
+    "start": "webpack-dev-server --config webpack.config.js",
+    "bundle": "webpack --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"
