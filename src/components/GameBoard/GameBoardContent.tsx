@@ -21,6 +21,10 @@ const styles = createStyles({
     top: '170px',
     left: '37px',
   },
+  button: {
+    position: 'relative',
+    bottom: '10px'
+  }
 })
 
 interface GameBoardContentProps {
@@ -54,8 +58,8 @@ const GameBoardContent: React.SFC<Props> = ({
         <img src={currentCard.image} height="150" width="105" />
       }
       <div className={classes.textBox}>
-        <div>
-          <Button onClick={handleDrawCard}>
+        <div className={classes.button}>
+          <Button onClick={handleDrawCard} variant="outlined" color="primary">
             Draw Card
           </Button>
         </div>
