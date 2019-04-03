@@ -27,10 +27,12 @@ type Props = WithStyles<typeof styles> & DeckProps;
 
 const cardBackArtUrl = 'https://opengameart.org/sites/default/files/card%20back%20black.png'
 
-const Deck:React.SFC<Props> = ({ classes, remainingCards }) => {
+export const unwrappedDeck: React.SFC<Props> = ({ classes, remainingCards }) => {
   return (
     <div className={classes.deckContainer}>
-      <div>Remaining Cards: {remainingCards} </div>
+      <div>
+        Remaining Cards: {remainingCards}
+      </div>
       <div className={classes.deck}>
         <img src={cardBackArtUrl} height='150px' width='105px'/>
       </div>
@@ -38,4 +40,4 @@ const Deck:React.SFC<Props> = ({ classes, remainingCards }) => {
   )
 }
 
-export default withStyles(styles)(Deck);
+export default withStyles(styles)(unwrappedDeck);
