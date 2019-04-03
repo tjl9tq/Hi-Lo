@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js",
-    "bundle": "webpack --config webpack.config.js"
+    "bundle": "webpack --config webpack.config.js",
+    "test": "mocha ./testSetup.ts -r ts-node/register -r jsdom-global/register ./src/**/*.test.{ts,tsx}"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -19,22 +20,29 @@
     "@babel/runtime": "7.0.0-beta.55",
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "@types/mocha": "^5.2.6",
     "@types/node": "^11.11.0",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
     "@types/react-redux": "^7.0.3",
+    "@types/sinon": "^7.0.11",
     "axios": "^0.18.0",
+    "jsdom": "^14.0.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^6.0.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-loading": "^2.0.3",
     "react-redux": "^6.0.1",
     "redux-thunk": "^2.3.0",
+    "sinon": "^7.3.1",
+    "ts-mocha": "^6.0.0",
     "typescript": "^3.3.3333"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/chai-enzyme": "^0.6.6",
-    "@types/enzyme": "^3.9.0",
+    "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "chai": "^4.2.0",
     "chai-enzyme": "^1.0.0-beta.1",

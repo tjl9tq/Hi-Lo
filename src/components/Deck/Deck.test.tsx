@@ -23,6 +23,6 @@ describe('<Deck>', () => {
   });
 
   it('renders correctly',() => {
-    expect(wrapper).to.have.exactly(1).descendants('div');
+    expect(wrapper).to.have.exactly(3).descendants('div');
   });
 });
