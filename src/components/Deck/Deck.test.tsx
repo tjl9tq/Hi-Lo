@@ -24,5 +24,7 @@ describe('<Deck>', () => {
 
   it('renders correctly',() => {
     expect(wrapper).to.have.exactly(3).descendants('div');
+    expect(wrapper.find('div').at(0)).to.have.prop('className', defaultProps.classes.deckContainer);
+    expect(wrapper.find('div').at(2)).to.have.prop('className', defaultProps.classes.deck);
   });
 });

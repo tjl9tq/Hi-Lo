@@ -37,6 +37,4 @@ export const unwrappedDeck: React.SFC<Props> = ({ classes, remainingCards }) =>
       </div>
     </div>
 
-export const Test: React.SFC<{}> = () => <div>Hello</div>
-
 export default withStyles(styles)(unwrappedDeck);
